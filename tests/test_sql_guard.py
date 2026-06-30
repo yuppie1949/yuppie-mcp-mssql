@@ -4,7 +4,7 @@ import os
 
 import pytest
 
-from jewei_mcp_mssql.utils.sql_guard import SqlType, check_permission, detect_sql_type
+from yuppie_mcp_mssql.utils.sql_guard import SqlType, check_permission, detect_sql_type
 
 
 class TestDetectSqlType:

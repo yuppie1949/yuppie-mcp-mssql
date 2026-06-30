@@ -3,14 +3,14 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "jewei-mcp-mssql"
+name = "yuppie-mcp-mssql"
 version = "0.0.0"
 description = "MCP Server for Microsoft SQL Server — no native drivers required"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
 authors = [
-    { name = "Jewei", email = "jiweifong@gmail.com" }
+    { name = "yuppie", email = "yidaowanli@gmail.com" }
 ]
 keywords = ["mcp", "model-context-protocol", "mssql", "sql-server"]
 classifiers = [
@@ -37,14 +37,14 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/jeweis/jewei-mcp-mssql"
-Repository = "https://github.com/jeweis/jewei-mcp-mssql"
+Homepage = "https://github.com/yuppie1949/yuppie-mcp-mssql"
+Repository = "https://github.com/yuppie1949/yuppie-mcp-mssql"
 
 [project.scripts]
-jewei-mcp-mssql = "jewei_mcp_mssql.server:main"
+yuppie-mcp-mssql = "yuppie_mcp_mssql.server:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/jewei_mcp_mssql"]
+packages = ["src/yuppie_mcp_mssql"]
 
 [tool.ruff]
 line-length = 100

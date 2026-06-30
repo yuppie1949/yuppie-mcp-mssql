@@ -5,8 +5,8 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from jewei_mcp_mssql.utils.connection import execute, handle_db_error
-from jewei_mcp_mssql.utils.sql_guard import check_permission, detect_sql_type
+from yuppie_mcp_mssql.utils.connection import execute, handle_db_error
+from yuppie_mcp_mssql.utils.sql_guard import check_permission, detect_sql_type
 
 
 class ExecuteSqlInput(BaseModel):

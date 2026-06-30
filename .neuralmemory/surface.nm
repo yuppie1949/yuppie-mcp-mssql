@@ -1,0 +1,97 @@
+# ═══════════════════════════════════════════════════
+# .neuralmemory/surface.nm
+# Neural Memory Knowledge Surface v1
+# Auto-generated from brain.db | Editable by human
+# ═══════════════════════════════════════════════════
+---
+brain: default
+updated: 2026-06-30T01:50:57
+neurons: 2382
+synapses: 33081
+token_budget: 1200
+depth_available: [surface, detail, deep]
+---
+
+# ── GRAPH ──────────────────────────────────────────
+# Nodes = key concepts. Edges = causal/decisional links.
+# Agent: scan this section to understand the knowledge landscape.
+# Format: [id] content (type) {p:N} →edge→ [target_id_or_text]
+
+[c16] Session activity: 2、获取课程目录，根据目录抓取内容到Obsidian（新建笔记格式参照这里 yidaowanliu/CLAUDE.md）… (concept) {p:5}
+  →co_occurs→ "Session activity: 2、获取课程目录，根据目录抓取内容到Obsidian（新建笔记格式参照这里…"
+
+[c17] TODO: deploy to dev and verify the taxonomy sync and init_launch flows work… (concept) {p:5}
+
+[c18] Tag (concept) {p:5}
+  →co_occurs→ "CI"
+  →co_occurs→ "CD"
+
+[c19] Session activity: <command-args></command-args> <local-command-stdout>MCP… (concept) {p:5}
+
+[c1] Session activity: <command-args></command-args> <local-command-stdout>MCP… (concept) {p:6}
+  →involves→ "Authorization"
+  →felt→ "disappointment"
+  →involves→ "Dynamically"
+
+[c2] Session activity: 4. 扫描并清理【输出目录】中创建时间在 7 天前的 `.xlsx` 历史文件。 - **文件命名**：严格遵循… (concept) {p:6}
+  →co_occurs→ "Preference: generic development practices"
+  →involves→ "UTC"
+  →related_to→ "xlsx yyyymmdd hhmm"
+  →co_occurs→ "Preference: sensitive information (api keys, tokens) in…"
+  →related_to→ "Error: messages to users", "write unit tests for all new…"
+
+[c3] Session activity: 2、获取课程目录，根据目录抓取内容到Obsidian（新建笔记格式参照这里 yidaowanliu/CLAUDE.md）… (concept) {p:6}
+  →related_to→ "claude md"
+  →involves→ "Chrome"
+  →involves→ "Playwright MCP"
+  →related_to→ "md request"
+
+[c4] is intentionality, not intensity (concept) {p:6}
+  →related_to→ "intensity"
+  →co_occurs→ "TODO: be the same"
+
+# ── CLUSTERS ───────────────────────────────────────
+# Auto-detected topic groups from brain.db entity co-occurrence.
+# Agent: use clusters to scope recall queries.
+
+@session: [08294bd1-4be3-43cf-a5bc-4eb7132d6247, 0ac4599b-630d-4fca-b4d6-88307a9f58b6] "Session activity: 2、获取课程目录，根据目录抓取内容到Obsi"
+@preference: [0151b3fa-5504-4c84-acb3-f85d0859e08b, 0487a0c3-0e8d-4582-a1ed-3300b5db2357] "Preference: sensitive information (api k"
+@session: [0428338f-d5b1-4164-b5d9-e2ebf8131d7e, 0b313f09-2fe8-405b-a179-7d9fa7c3d967, 0bafe1bc-f874-4d03-b06c-5da0e425182e] "Session activity: yidaowanliu_副本/20_Area, Session activity: https://agentskills.io"
+@preference: [04d7d05f-877c-4ee6-8e84-9cf94f68ed8a, 0b7fc98b-189b-4be5-bf59-00b6d5971248] "Preference: generic development practice"
+@tag: [01fd13ba-d7bf-4e92-91c6-a259fb5382d6, 073401e5-8da9-48c4-bfd6-9040463b9ceb] "Tag, CI"
+
+# ── SIGNALS ────────────────────────────────────────
+# Active alerts, unresolved items, pending decisions.
+# Agent: check this FIRST each session for urgent context.
+
+~ Session activity: 4. 扫描并清理【输出目录】中创建时间在 7 天前的 `.xlsx` 历史文件。 - **文件命名**：严格遵循 `YYYY
+! [connect, connect visual, error, error connect, session_end]
+! [connect, connect visual, error, error connect, session_end]
+! Session activity: cp: cannot create regular file '/Users/aosom/Documents/yhui/cl | Session…
+! Session activity: 优化 aaa-db-export skill，添加工作目录、虚拟环境和 .env 配置支持。已完成文档和代码修改，等待确认是 | Session…
+! [connect, connect visual, error, error connect, session_end]
+! [connect, connect visual, error, error connect, session_end]
+! [connect, connect visual, error, error connect, session_end]
+! [connect, connect visual, error, error connect, session_end]
+~ Error: to connect to visual studio code
+
+# ── DEPTH MAP ──────────────────────────────────────
+# When surface isn't enough, this tells agent WHERE to dig.
+# Format: [id] → depth_hint (context)
+
+[c1] → NEEDS_DEEP (11 synapses in brain.db, recall "Session activity: <command-args></comma…")
+[c2] → NEEDS_DETAIL (14 total synapses, recall "Session activity: 4. 扫描并清理【输出目录】中创建时间在…")
+[c3] → NEEDS_DETAIL (10 total synapses, recall "Session activity: 2、获取课程目录，根据目录抓取内容到Obs…")
+[c4] → NEEDS_DEEP (53 synapses in brain.db, recall "is intentionality, not intensity")
+[c16] → NEEDS_DEEP (8 synapses in brain.db, recall "Session activity: 2、获取课程目录，根据目录抓取内容到Obs…")
+[c17] → NEEDS_DEEP (7 synapses in brain.db, recall "TODO: deploy to dev and verify the…")
+[c18] → NEEDS_DETAIL (5 total synapses, recall "Tag")
+[c19] → NEEDS_DEEP (5 synapses in brain.db, recall "Session activity: <command-args></comma…")
+
+# ── META ───────────────────────────────────────────
+# Stats for agent to gauge brain richness
+
+coverage: 0.01
+staleness: 0.14
+last_consolidation: 2026-06-30T01:50:57
+top_entities: [Session, Session, Session, TODO:, TODO:]

@@ -7,8 +7,8 @@ from mcp.server.fastmcp import FastMCP
 from mcp.types import ToolAnnotations
 from pydantic import Field
 
-from jewei_mcp_mssql.tools.execute import ExecuteSqlInput, execute_sql
-from jewei_mcp_mssql.tools.schema import (
+from yuppie_mcp_mssql.tools.execute import ExecuteSqlInput, execute_sql
+from yuppie_mcp_mssql.tools.schema import (
     DescribeTableInput,
     ListTablesInput,
     describe_table,

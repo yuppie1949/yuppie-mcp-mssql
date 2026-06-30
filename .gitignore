@@ -7,3 +7,15 @@ build/
 .mypy_cache/
 .ruff_cache/
 .pytest_cache/
+
+# Environment variables (contains sensitive data)
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+

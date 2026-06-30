@@ -1,4 +1,4 @@
-# jewei-mcp-mssql
+# yuppie-mcp-mssql
 
 Microsoft SQL Server MCP Server — 让 AI 助手能够查询和操作 SQL Server，**无需安装任何本地驱动**（纯 Python 实现）。
 
@@ -20,7 +20,7 @@ Microsoft SQL Server MCP Server — 让 AI 助手能够查询和操作 SQL Serve
     "mssql": {
       "type": "stdio",
       "command": "uvx",
-      "args": ["jewei-mcp-mssql"],
+      "args": ["yuppie-mcp-mssql"],
       "env": {
         "DB_HOST": "localhost",
         "DB_PORT": "1433",
@@ -42,10 +42,32 @@ Microsoft SQL Server MCP Server — 让 AI 助手能够查询和操作 SQL Serve
   "mcpServers": {
     "mssql": {
       "command": "uvx",
-      "args": ["jewei-mcp-mssql"],
+      "args": ["yuppie-mcp-mssql"],
       "env": {
         "DB_HOST": "localhost",
         "DB_USER": "sa",
+        "DB_PASSWORD": "your_password"
+      }
+    }
+  }
+}
+```
+
+### Cherry Studio
+
+打开 **设置** → **MCP Servers**，粘贴以下 JSON 配置：
+
+```json
+{
+  "mcpServers": {
+    "mssql": {
+      "command": "uvx",
+      "args": ["yuppie-mcp-mssql"],
+      "env": {
+        "DB_HOST": "your_host",
+        "DB_PORT": "1433",
+        "DB_NAME": "your_database",
+        "DB_USER": "your_username",
         "DB_PASSWORD": "your_password"
       }
     }
@@ -63,7 +85,7 @@ Microsoft SQL Server MCP Server — 让 AI 助手能够查询和操作 SQL Serve
   "mcp": {
     "mssql": {
       "type": "local",
-      "command": ["uvx", "jewei-mcp-mssql"],
+      "command": ["uvx", "yuppie-mcp-mssql"],
       "enabled": true,
       "environment": {
         "DB_HOST": "localhost",
@@ -84,7 +106,7 @@ Microsoft SQL Server MCP Server — 让 AI 助手能够查询和操作 SQL Serve
   "mcpServers": {
     "mssql": {
       "command": "uvx",
-      "args": ["jewei-mcp-mssql"],
+      "args": ["yuppie-mcp-mssql"],
       "env": {
         "DB_HOST": "localhost",
         "DB_USER": "sa",
@@ -122,6 +144,42 @@ Microsoft SQL Server MCP Server — 让 AI 助手能够查询和操作 SQL Serve
 |------|------|--------|
 | `MCP_TRANSPORT` | 传输模式：`stdio` 或 `streamable_http` | `stdio` |
 | `MCP_PORT` | HTTP 模式端口 | `8000` |
+
+## 测试与调试
+
+### 使用 MCP Inspector
+
+在项目根目录创建 `.env` 文件配置数据库连接：
+
+```bash
+DB_HOST=your_host
+DB_PORT=1433
+DB_NAME=your_database
+DB_USER=your_username
+DB_PASSWORD=your_password
+```
+
+然后启动 MCP Inspector（会自动读取 `.env` 文件）：
+
+```bash
+npx @modelcontextprotocol/inspector uv run yuppie-mcp-mssql
+```
+
+Inspector 会打开一个网页界面，可以：
+- 查看所有可用工具
+- 直接调用工具测试
+- 查看请求/响应日志
+- 测试环境变量
+
+### 运行测试
+
+```bash
+# 安装开发依赖
+uv pip install -e ".[dev]"
+
+# 运行测试
+uv run pytest -v
+```
 
 ## 可用工具
 

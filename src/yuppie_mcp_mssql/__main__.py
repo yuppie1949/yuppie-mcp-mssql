@@ -1,4 +1,4 @@
-"""允许通过 python -m jewei_mcp_mssql 运行"""
+"""允许通过 python -m yuppie_mcp_mssql 运行"""
 
 from .server import main
 
