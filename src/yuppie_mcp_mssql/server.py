@@ -8,6 +8,7 @@ from mcp.types import ToolAnnotations
 from pydantic import Field
 
 from yuppie_mcp_mssql.tools.execute import ExecuteSqlInput, execute_sql
+from yuppie_mcp_mssql.tools.export import ExportToCsvInput, export_to_csv
 from yuppie_mcp_mssql.tools.schema import (
     DescribeTableInput,
     ListTablesInput,
@@ -124,6 +125,41 @@ async def tool_describe_table(
             table_schema=table_schema,
             response_format=response_format,
         )
+    )
+
+
+@mcp.tool(
+    name="mssql_export_to_csv",
+    annotations=ToolAnnotations(
+        title="导出查询结果到 CSV",
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=False,
+        openWorldHint=True,
+    ),
+)
+async def tool_export_to_csv(
+    query: Annotated[str, Field(description="SQL 查询语句或 .sql 文件路径", min_length=1)],
+    output_path: Annotated[
+        str, Field(description="CSV 文件输出路径（文件路径或目录路径，目录会自动生成 export.csv）", min_length=1)
+    ],
+    delimiter: Annotated[
+        str, Field(description="分隔符：逗号(,)、制表符(\\t)、分号(;) 等，默认逗号")
+    ] = ",",
+) -> str:
+    """将 SQL 查询结果导出到本地 CSV 文件。
+
+    支持：
+    - 直接传入 SQL 语句
+    - 传入 .sql 文件路径（自动读取文件内容）
+    - 自定义分隔符（逗号、制表符、分号等）
+
+    仅允许 SELECT 查询，写操作会被拒绝。
+
+    格式：UTF-8 编码，包含表头。
+    """
+    return await export_to_csv(
+        ExportToCsvInput(query=query, output_path=output_path, delimiter=delimiter)
     )
 
 

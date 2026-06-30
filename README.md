@@ -189,6 +189,7 @@ uv run pytest -v
 | `mssql_execute_sql` | 执行 SQL 语句（SELECT 始终允许，写操作受环境变量控制） |
 | `mssql_list_tables` | 列出当前数据库下的所有表 |
 | `mssql_describe_table` | 获取表的列结构（列名、类型、可空性等） |
+| `mssql_export_to_csv` | 将查询结果导出到 CSV 文件（支持自定义分隔符） |
 
 ## 提示示例
 
@@ -210,6 +211,14 @@ uv run pytest -v
 
 ```
 统计 dbo.Orders 表中每个状态的订单数量，按数量降序排列
+```
+
+```
+将查询结果导出到 CSV 文件（默认逗号分隔）
+```
+
+```
+将查询结果导出到 TSV 文件（制表符分隔）
 ```
 
 ## License
