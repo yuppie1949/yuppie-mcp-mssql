@@ -19,3 +19,5 @@ build/
 # macOS
 .DS_Store
 
+# Neural Memory (local data)
+.neuralmemory/
