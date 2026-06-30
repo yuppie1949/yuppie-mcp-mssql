@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "yuppie-mcp-mssql"
-version = "0.0.0"
+version = "0.1.0"
 description = "MCP Server for Microsoft SQL Server — no native drivers required"
 readme = "README.md"
 license = "MIT"
@@ -45,6 +45,32 @@ yuppie-mcp-mssql = "yuppie_mcp_mssql.server:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/yuppie_mcp_mssql"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/README.md",
+    "/LICENSE",
+    "/pyproject.toml",
+]
+exclude = [
+    "/.git",
+    "/.github",
+    "/.venv",
+    "/__pycache__",
+    "/.pytest_cache",
+    "/.mypy_cache",
+    "/.ruff_cache",
+    "/dist",
+    "/build",
+    "/.env",
+    "/.env.example",
+    "/docs",
+    "/tests",
+    "/.neuralmemory",
+    "/scripts",
+    "/.DS_Store",
+]
 
 [tool.ruff]
 line-length = 100
