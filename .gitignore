@@ -21,3 +21,6 @@ build/
 
 # Neural Memory (local data)
 .neuralmemory/
+
+# Development specs (draft documents, not implementation specs)
+docs/
