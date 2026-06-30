@@ -4,9 +4,11 @@ import asyncio
 import os
 from functools import partial
 from typing import Any
+from dotenv import load_dotenv
 
 import pytds  # type: ignore[import-untyped]
 
+load_dotenv()
 
 def _get_conn_params() -> dict[str, Any]:
     return {
