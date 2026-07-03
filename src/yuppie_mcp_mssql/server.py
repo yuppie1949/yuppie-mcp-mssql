@@ -18,7 +18,10 @@ from yuppie_mcp_mssql.tools.schema import (
     list_tables,
 )
 
-mcp = FastMCP("mssql_mcp")
+mcp = FastMCP(
+    name="mssql_mcp",
+    instructions="MSSQL 数据库操作工具集：执行任意 SQL 查询、获取数据库和表结构元信息、将查询结果导出为 CSV 文件。支持 SELECT 查询及受控的 INSERT/UPDATE/DELETE/DDL 操作。"
+)
 mcp._mcp_server.version = __version__
 
 
