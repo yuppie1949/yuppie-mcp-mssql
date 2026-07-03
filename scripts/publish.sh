@@ -29,8 +29,9 @@ if [ -z "$NEW_VERSION" ]; then
     echo -e "${YELLOW}使用当前版本: ${NEW_VERSION}${NC}"
 fi
 
-# 更新版本号
+# 更新版本号（同步两处）
 sed -i '' "s/^version = .*/version = \"${NEW_VERSION}\"/" pyproject.toml
+sed -i '' "s/__version__ = .*/__version__ = \"${NEW_VERSION}\"/" src/yuppie_mcp_mssql/__init__.py
 echo -e "${GREEN}✓ 版本号已更新为 ${NEW_VERSION}${NC}"
 
 # 确认发布
@@ -44,7 +45,8 @@ if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# 构建
+# 清理旧构建产物，只发布新版本
+rm -rf dist/
 echo -e "${GREEN}正在构建...${NC}"
 uv build
 

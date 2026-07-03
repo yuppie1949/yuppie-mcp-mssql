@@ -12,7 +12,7 @@ Microsoft SQL Server MCP Server — 让 AI 助手能够查询和操作 SQL Serve
 
 ### Claude Code
 
-在项目 `.mcp.json` 或全局配置中添加：
+在 `.mcp.json` 中添加（`--refresh` 强制拉取 PyPI 最新版，忽略本地缓存）：
 
 ```json
 {
@@ -20,7 +20,7 @@ Microsoft SQL Server MCP Server — 让 AI 助手能够查询和操作 SQL Serve
     "mssql": {
       "type": "stdio",
       "command": "uvx",
-      "args": ["yuppie-mcp-mssql"],
+      "args": ["--refresh", "yuppie-mcp-mssql"],
       "env": {
         "DB_HOST": "localhost",
         "DB_PORT": "1433",

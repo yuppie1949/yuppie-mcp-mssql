@@ -7,6 +7,7 @@ from mcp.server.fastmcp import FastMCP
 from mcp.types import ToolAnnotations
 from pydantic import Field
 
+from yuppie_mcp_mssql import __version__
 from yuppie_mcp_mssql.tools.execute import ExecuteSqlInput, execute_sql
 from yuppie_mcp_mssql.tools.export import ExportToCsvInput, export_to_csv
 from yuppie_mcp_mssql.tools.schema import (
@@ -18,6 +19,7 @@ from yuppie_mcp_mssql.tools.schema import (
 )
 
 mcp = FastMCP("mssql_mcp")
+mcp._mcp_server.version = __version__
 
 
 @mcp.tool(
