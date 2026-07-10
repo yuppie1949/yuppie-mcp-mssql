@@ -20,6 +20,7 @@ from yuppie_mcp_mssql.tools.schema import (
 
 mcp = FastMCP(
     name="mssql_mcp",
+    host=os.getenv("MCP_HOST", "127.0.0.1"),
     instructions="MSSQL 数据库操作工具集：执行任意 SQL 查询、获取数据库和表结构元信息、将查询结果导出为 CSV 文件。支持 SELECT 查询及受控的 INSERT/UPDATE/DELETE/DDL 操作。"
 )
 mcp._mcp_server.version = __version__
@@ -169,9 +170,9 @@ async def tool_export_to_csv(
 
 
 def main() -> None:
-    transport = os.getenv("MCP_TRANSPORT", "streamable-http")
+    transport = os.getenv("MCP_TRANSPORT", "stdio")
     if transport == "streamable-http":
-        mcp.settings.port = int(os.getenv("MCP_PORT", "8080"))
+        mcp.settings.port = int(os.getenv("MCP_PORT", "8000"))
         mcp.run(transport="streamable-http")
     else:
         mcp.run()
