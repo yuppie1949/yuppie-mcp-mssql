@@ -56,9 +56,7 @@ def _validate_output_path(output_path: str) -> None:
 
     if ".." in str(normalized.parts):
         raise ValueError("无效的输出路径：不允许包含 '..'")
-    if not str(path).startswith(str(Path.cwd())) and not str(path).startswith(
-        str(Path.home())
-    ):
+    if not str(path).startswith(str(Path.cwd())) and not str(path).startswith(str(Path.home())):
         raise ValueError("无效的输出路径：仅允许当前目录或用户主目录下的路径")
 
 
@@ -151,6 +149,5 @@ async def export_to_csv(params: ExportToCsvInput) -> str:
 
     delimiter_desc = "," if params.delimiter == "," else f"{params.delimiter!r}"
     return (
-        f"已成功导出 {row_count} 行（分隔符：{delimiter_desc}，来源：{sql_source}）→ "
-        f"{actual_path}"
+        f"已成功导出 {row_count} 行（分隔符：{delimiter_desc}，来源：{sql_source}）→ {actual_path}"
     )

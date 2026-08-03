@@ -33,7 +33,7 @@ MCP_TRANSPORT=streamable-http MCP_PORT=8000 DB_HOST=localhost DB_USER=sa DB_PASS
 
 ### 核心模块
 
-- **`server.py`**: MCP Server 入口，使用 FastMCP 框架注册 4 个工具
+- **`server.py`**: MCP Server 入口，使用 MCPServer 框架（mcp SDK 2.x）注册 5 个工具
 - **`utils/connection.py`**: 基于 `pytds` 的数据库连接管理，用 `asyncio.run_in_executor` 包装同步调用
 - **`utils/sql_guard.py`**: SQL 类型检测和权限校验，默认只读，通过环境变量控制写权限
 - **`tools/execute.py`**: 执行 SQL 语句的核心工具，支持输出格式切换（markdown/json）
@@ -51,7 +51,7 @@ MCP_TRANSPORT=streamable-http MCP_PORT=8000 DB_HOST=localhost DB_USER=sa DB_PASS
 
 支持两种 MCP 传输模式，通过 `MCP_TRANSPORT` 环境变量切换：
 - `stdio`（默认）：标准输入/输出通信
-- `streamable-http`：HTTP 通信，通过 `MCP_PORT` 指定端口（默认 8000）
+- `streamable-http`：HTTP 通信，host/port 通过 `run()` 的 `MCP_HOST`（默认 127.0.0.1）/ `MCP_PORT`（默认 8000）指定
 
 ## 代码规范
 

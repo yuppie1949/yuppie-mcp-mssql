@@ -3,7 +3,7 @@
 import os
 from typing import Annotated
 
-from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
 from mcp.types import ToolAnnotations
 from pydantic import Field
 
@@ -18,22 +18,24 @@ from yuppie_mcp_mssql.tools.schema import (
     list_tables,
 )
 
-mcp = FastMCP(
+mcp = MCPServer(
     name="mssql_mcp",
-    host=os.getenv("MCP_HOST", "127.0.0.1"),
-    instructions="MSSQL 数据库操作工具集：执行任意 SQL 查询、获取数据库和表结构元信息、将查询结果导出为 CSV 文件。支持 SELECT 查询及受控的 INSERT/UPDATE/DELETE/DDL 操作。"
+    instructions=(
+        "MSSQL 数据库操作工具集：执行任意 SQL 查询、获取数据库和表结构元信息、"
+        "将查询结果导出为 CSV 文件。支持 SELECT 查询及受控的 INSERT/UPDATE/DELETE/DDL 操作。"
+    ),
+    version=__version__,
 )
-mcp._mcp_server.version = __version__
 
 
 @mcp.tool(
     name="mssql_execute_sql",
     annotations=ToolAnnotations(
         title="执行 SQL 语句",
-        readOnlyHint=False,
-        destructiveHint=True,
-        idempotentHint=False,
-        openWorldHint=True,
+        read_only_hint=False,
+        destructive_hint=True,
+        idempotent_hint=False,
+        open_world_hint=True,
     ),
 )
 async def tool_execute_sql(
@@ -67,10 +69,10 @@ async def tool_execute_sql(
     name="mssql_get_db_info",
     annotations=ToolAnnotations(
         title="获取数据库基本信息",
-        readOnlyHint=True,
-        destructiveHint=False,
-        idempotentHint=True,
-        openWorldHint=True,
+        read_only_hint=True,
+        destructive_hint=False,
+        idempotent_hint=True,
+        open_world_hint=True,
     ),
 )
 async def tool_get_db_info(
@@ -87,10 +89,10 @@ async def tool_get_db_info(
     name="mssql_list_tables",
     annotations=ToolAnnotations(
         title="列出数据表",
-        readOnlyHint=True,
-        destructiveHint=False,
-        idempotentHint=True,
-        openWorldHint=True,
+        read_only_hint=True,
+        destructive_hint=False,
+        idempotent_hint=True,
+        open_world_hint=True,
     ),
 )
 async def tool_list_tables(
@@ -110,10 +112,10 @@ async def tool_list_tables(
     name="mssql_describe_table",
     annotations=ToolAnnotations(
         title="描述表结构",
-        readOnlyHint=True,
-        destructiveHint=False,
-        idempotentHint=True,
-        openWorldHint=True,
+        read_only_hint=True,
+        destructive_hint=False,
+        idempotent_hint=True,
+        open_world_hint=True,
     ),
 )
 async def tool_describe_table(
@@ -138,16 +140,20 @@ async def tool_describe_table(
     name="mssql_export_to_csv",
     annotations=ToolAnnotations(
         title="导出查询结果到 CSV",
-        readOnlyHint=True,
-        destructiveHint=False,
-        idempotentHint=False,
-        openWorldHint=True,
+        read_only_hint=True,
+        destructive_hint=False,
+        idempotent_hint=False,
+        open_world_hint=True,
     ),
 )
 async def tool_export_to_csv(
     query: Annotated[str, Field(description="SQL 查询语句或 .sql 文件路径", min_length=1)],
     output_path: Annotated[
-        str, Field(description="CSV 文件输出路径（文件路径或目录路径，目录会自动生成 export.csv）", min_length=1)
+        str,
+        Field(
+            description="CSV 文件输出路径（文件路径或目录路径，目录会自动生成 export.csv）",
+            min_length=1,
+        ),
     ],
     delimiter: Annotated[
         str, Field(description="分隔符：逗号(,)、制表符(\\t)、分号(;) 等，默认逗号")
@@ -172,8 +178,11 @@ async def tool_export_to_csv(
 def main() -> None:
     transport = os.getenv("MCP_TRANSPORT", "stdio")
     if transport == "streamable-http":
-        mcp.settings.port = int(os.getenv("MCP_PORT", "8000"))
-        mcp.run(transport="streamable-http")
+        mcp.run(
+            transport="streamable-http",
+            host=os.getenv("MCP_HOST", "127.0.0.1"),
+            port=int(os.getenv("MCP_PORT", "8000")),
+        )
     else:
         mcp.run()
 
