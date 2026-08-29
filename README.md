@@ -2,6 +2,17 @@
 
 Microsoft SQL Server MCP Server — 让 AI 助手能够查询和操作 SQL Server，**无需安装任何本地驱动**（纯 Python 实现）。
 
+## 双包结构
+
+本仓库拆分为两个 PyPI 包：
+
+| 包 | 说明 | 安装 |
+|----|------|------|
+| `yuppie-mcp-mssql` | MCP 壳包（本 README 所描述），依赖库包 | `uvx yuppie-mcp-mssql` |
+| `yuppie-mssql` | 纯库包（连接 + SQL 权限守卫），无 MCP 依赖 | `pip install yuppie-mssql` |
+
+只想在代码里直接调用 MSSQL 客户端、不想引入 MCP 依赖的用户，请用库包。
+
 ## 特性
 
 - 无驱动：基于 `python-tds`，无需 ODBC 驱动或 FreeTDS

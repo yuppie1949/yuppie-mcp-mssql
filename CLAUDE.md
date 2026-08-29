@@ -9,18 +9,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 开发命令
 
 ```bash
-# 安装开发依赖
-pip install -e ".[dev]"
+# 安装开发依赖（workspace 双包）
+uv sync --all-packages --all-extras
 
 # 运行测试
-pytest -v
+uv run pytest -v
 
 # 代码检查
-ruff check src/
-ruff format --check src/
+ruff check packages/ tests/
+ruff format --check packages/ tests/
 
 # 类型检查
-mypy src/
+mypy packages/*/src
 
 # 本地运行 MCP Server（stdio 模式）
 DB_HOST=localhost DB_USER=sa DB_PASSWORD=xxx uvx jewei-mcp-mssql
@@ -29,15 +29,22 @@ DB_HOST=localhost DB_USER=sa DB_PASSWORD=xxx uvx jewei-mcp-mssql
 MCP_TRANSPORT=streamable-http MCP_PORT=8000 DB_HOST=localhost DB_USER=sa DB_PASSWORD=xxx uvx jewei-mcp-mssql
 ```
 
+## 双包结构
+
+本仓库拆分为两个 PyPI 包（workspace 结构）：
+
+- **库包 `yuppie-mssql`**（`packages/yuppie-mssql/`）：纯 MSSQL 客户端，无 mcp 无 pydantic 依赖
+- **壳包 `yuppie-mcp-mssql`**（`packages/yuppie-mcp-mssql/`）：MCP Server，依赖库包
+
 ## 架构设计
 
 ### 核心模块
 
-- **`server.py`**: MCP Server 入口，使用 MCPServer 框架（mcp SDK 2.x）注册 5 个工具
-- **`utils/connection.py`**: 基于 `pytds` 的数据库连接管理，用 `asyncio.run_in_executor` 包装同步调用
-- **`utils/sql_guard.py`**: SQL 类型检测和权限校验，默认只读，通过环境变量控制写权限
-- **`tools/execute.py`**: 执行 SQL 语句的核心工具，支持输出格式切换（markdown/json）
-- **`tools/schema.py`**: 数据库元信息查询工具（库信息、列表、表结构）
+- **`packages/yuppie-mcp-mssql/src/yuppie_mcp_mssql/server.py`**: MCP Server 入口，使用 MCPServer 框架（mcp SDK 2.x）注册 5 个工具
+- **`packages/yuppie-mssql/src/yuppie_mssql/connection.py`**: 基于 `pytds` 的数据库连接管理，用 `asyncio.run_in_executor` 包装同步调用
+- **`packages/yuppie-mssql/src/yuppie_mssql/sql_guard.py`**: SQL 类型检测和权限校验，默认只读，通过环境变量控制写权限
+- **`packages/yuppie-mcp-mssql/src/yuppie_mcp_mssql/tools/execute.py`**: 执行 SQL 语句的核心工具，支持输出格式切换（markdown/json）
+- **`packages/yuppie-mcp-mssql/src/yuppie_mcp_mssql/tools/schema.py`**: 数据库元信息查询工具（库信息、列表、表结构）
 
 ### 权限控制机制
 
