@@ -1,9 +1,10 @@
 name: Publish to PyPI
 
-on:
-  push:
-    branches:
-      - main
+# 已停用:发布统一走 scripts/publish.sh(双包交互式发布 + tag)
+# on:
+#   push:
+#     branches:
+#       - main
 
 permissions:
   contents: read
