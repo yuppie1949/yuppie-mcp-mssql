@@ -3,7 +3,6 @@
 import json
 
 from pydantic import BaseModel, ConfigDict, Field
-
 from yuppie_mssql.connection import execute, handle_db_error
 
 

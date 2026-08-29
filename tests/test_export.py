@@ -1,11 +1,7 @@
 """export 工具单元测试，无需数据库连接"""
 
-import tempfile
-from pathlib import Path
-
 import pytest
 from pydantic import ValidationError
-
 from yuppie_mcp_mssql.tools.export import (
     ExportToCsvInput,
     _detect_file_path,
@@ -142,7 +138,7 @@ class TestWriteCsv:
             _write_csv([], "/tmp/test.csv")
 
     def test_write_csv_with_special_characters(self, tmp_path):
-        rows = [{"id": 1, "text": "Hello, world!"}, {"id": 2, "text": 'Line\nBreak'}]
+        rows = [{"id": 1, "text": "Hello, world!"}, {"id": 2, "text": "Line\nBreak"}]
         output_path = tmp_path / "special.csv"
         _write_csv(rows, str(output_path))
         content = output_path.read_text(encoding="utf-8")

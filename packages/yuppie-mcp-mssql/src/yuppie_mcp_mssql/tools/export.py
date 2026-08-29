@@ -5,7 +5,6 @@ from pathlib import Path
 from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
-
 from yuppie_mssql.connection import execute, handle_db_error
 from yuppie_mssql.sql_guard import check_permission, detect_sql_type
 
