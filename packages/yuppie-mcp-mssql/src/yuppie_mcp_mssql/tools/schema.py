@@ -4,7 +4,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from yuppie_mcp_mssql.utils.connection import execute, handle_db_error
+from yuppie_mssql.connection import execute, handle_db_error
 
 
 class ListTablesInput(BaseModel):
